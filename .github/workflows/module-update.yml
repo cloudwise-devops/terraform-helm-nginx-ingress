@@ -99,5 +99,6 @@ jobs:
     - name: Push changes and tags
       run: |
         git push --tags
+        git push origin master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
