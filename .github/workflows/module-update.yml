@@ -1,18 +1,18 @@
 
 name: Check and udpate Ingress-Nginx Helm chart version
 
-# on:
-#   schedule:
-#     - cron: '*/10 * * * *'
-
 on:
-  pull_request:
-    types:
-      - opened
-      - reopened
-      - synchronize
-    branches:
-      - master
+  schedule:
+    - cron: '*/10 * * * *'
+
+# on:
+#   pull_request:
+#     types:
+#       - opened
+#       - reopened
+#       - synchronize
+#     branches:
+#       - master
 
 jobs:
   check-version:
