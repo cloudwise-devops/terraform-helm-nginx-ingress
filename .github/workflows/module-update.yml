@@ -57,18 +57,20 @@ jobs:
         current_version=$(jq -r '.variables.nginx_ingress_chart_version.value' plan.json)
         latest_version="${{ env.latest_version }}"
         echo "Current version: $current_version"
+        echo "update_version=false" >> $GITHUB_ENV
         cat variables.tf | grep -A 4 -B 4 nginx_ingress_chart_version
         if [[ "$latest_version" != "$current_version" ]]; then
+          echo "update_version=true" >> $GITHUB_ENV
           echo "New version found, updating to $latest_version"
           sed -i "s/$current_version/$latest_version/" variables.tf
         else
           echo "Already up-to-date"
-          exit 0 # Exit with success, stopping the workflow here
         fi
         cat variables.tf | grep -A 4 -B 4 nginx_ingress_chart_version
 
     - name: Get latest tag
       id: get_latest_tag
+      if: env.update_version == 'true'
       run: |
         git fetch --tags
         latest_tag=$(git tag --sort=-v:refname | head -n 1)
@@ -77,6 +79,7 @@ jobs:
 
     - name: Increment version
       id: increment_version
+      if: env.update_version == 'true'
       run: |
         IFS='.' read -r major minor patch <<< "${{ env.latest_tag }}"
         new_patch=$((patch + 1))
@@ -85,6 +88,7 @@ jobs:
         echo "new_tag=$new_tag" >> $GITHUB_ENV
 
     - name: Commit changes
+      if: env.update_version == 'true'   
       run: |
         git config --local user.name "GitHub Actions"
         git config --local user.email "actions@github.com"
@@ -93,10 +97,12 @@ jobs:
         git commit -m "Update module to nginx controller chart version - ${{ env.latest_version }}"
 
     - name: Tag the new version
+      if: env.update_version == 'true'
       run: |
         git tag ${{ env.new_tag }}
 
     - name: Push changes and tags
+      if: env.update_version == 'true'
       run: |
         # Push both the commit and the tags to the master branch
         git push origin master
