@@ -76,6 +76,7 @@ jobs:
         tar -xzf terraform-docs.tar.gz
         chmod +x terraform-docs
         sudo mv terraform-docs /usr/local/bin/
+        rm README.md
         terraform-docs markdown table --output-file README.md ./
 
     - name: Get latest tag
