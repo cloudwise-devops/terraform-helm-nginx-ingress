@@ -68,6 +68,16 @@ jobs:
         fi
         cat variables.tf | grep -A 4 -B 4 nginx_ingress_chart_version
 
+    - name: Install terraform-docs
+      id: docs
+      if: env.update_version == 'true'
+      run: |
+        curl -sSLo terraform-docs.tar.gz https://github.com/terraform-docs/terraform-docs/releases/download/v0.16.0/terraform-docs-v0.16.0-linux-amd64.tar.gz
+        tar -xzf terraform-docs.tar.gz
+        chmod +x terraform-docs
+        sudo mv terraform-docs /usr/local/bin/
+        terraform-docs markdown table --output-file README.md ./
+
     - name: Get latest tag
       id: get_latest_tag
       if: env.update_version == 'true'
