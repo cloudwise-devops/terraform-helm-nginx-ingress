@@ -29,7 +29,7 @@ controller:
     maxReplicas: ${nginx_ingress_replica_count}
   replicaCount: ${nginx_ingress_replica_count}
   enableCustomResources: "false"
-  opentelemetry
+  opentelemetry:
     enabled: "false"
   nodeSelector:
     kubernetes.io/os: linux
