@@ -24,7 +24,7 @@ controller:
       additionalLabels:
         release: "kube-prometheus-stack"
   autoscaling:
-    enabled: "${nginx_ingress_hpa_enabled}"
+    enabled: ${nginx_ingress_hpa_enabled}
     minReplicas: 1
     maxReplicas: ${nginx_ingress_replica_count}
   replicaCount: ${nginx_ingress_replica_count}
