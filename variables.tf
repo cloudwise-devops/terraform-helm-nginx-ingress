@@ -17,7 +17,7 @@ variable "nginx_ingress_helm_release_name" {
 }
 
 variable "nginx_ingress_chart_version" {
-  default = "4.11.2"
+  default = "4.11.3"
   type    = string
 }
 
