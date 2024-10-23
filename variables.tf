@@ -67,3 +67,14 @@ variable "nginx_ingress_deploy_on" {
   type        = string
   description = "Nodes selector for nginx_ingress in GKE"
 }
+variable "allow_snippet_annotations" {
+  default     = false
+  type        = bool
+  description = "Trigger error when a risky server-snippet or configuration-snippet is part of Ingress manifest"
+}
+
+variable "enable_annotation_validation" {
+  default     = true
+  type        = bool
+  description = "Enable Nginx validation webhook"
+}

@@ -29,6 +29,8 @@ resource "helm_release" "nginx-ingress" {
         nginx_ingress_lbl_external_enabled = local.nginx_ingress_lbl_external_enabled
         gcp_internal_subnet_name           = var.gcp_internal_subnet_name
         nginx_ingress_deploy_on            = var.nginx_ingress_deploy_on
+        allow_snippet_annotations          = var.allow_snippet_annotations
+        enable_annotation_validation       = var.enable_annotation_validation
       }
     )
   ]
