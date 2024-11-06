@@ -36,8 +36,8 @@ variable "nginx_ingress_allow_prometheus" {
 }
 
 variable "nginx_ingress_service_monitor_label" {
-  default = "kube-prometheus-stack"
-  type    = string
+  default     = "kube-prometheus-stack"
+  type        = string
   description = "Labels used for prometheus label"
 }
 
@@ -59,7 +59,7 @@ variable "nginx_ingress_lbl_internal_enabled" {
 }
 
 variable "nginx_ingress_class_name" {
-  default = null
+  default = "nginx"
   type    = string
 }
 
