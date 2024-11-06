@@ -32,7 +32,8 @@ variable "nginx_ingress_hpa_enabled" {
 }
 
 variable "nginx_ingress_allow_prometheus" {
-  default = false
+  default = "false"
+  type    = string
 }
 
 variable "nginx_ingress_service_monitor_label" {
