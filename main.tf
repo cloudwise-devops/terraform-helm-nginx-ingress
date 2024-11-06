@@ -21,16 +21,17 @@ resource "helm_release" "nginx-ingress" {
   values = [
     templatefile("${path.module}/values/nginx_ingress.yaml.tpl",
       {
-        nginx_ingress_lbl_internal_enabled = var.nginx_ingress_lbl_internal_enabled
-        nginx_ingress_hpa_enabled          = var.nginx_ingress_hpa_enabled
-        nginx_ingress_replica_count        = var.nginx_ingress_replica_count
-        nginx_ingress_allow_prometheus     = var.nginx_ingress_allow_prometheus
-        nginx_ingress_class_name           = local.nginx_ingress_class_name_substrate
-        nginx_ingress_lbl_external_enabled = local.nginx_ingress_lbl_external_enabled
-        gcp_internal_subnet_name           = var.gcp_internal_subnet_name
-        nginx_ingress_deploy_on            = var.nginx_ingress_deploy_on
-        allow_snippet_annotations          = var.allow_snippet_annotations
-        enable_annotation_validation       = var.enable_annotation_validation
+        nginx_ingress_lbl_internal_enabled  = var.nginx_ingress_lbl_internal_enabled
+        nginx_ingress_hpa_enabled           = var.nginx_ingress_hpa_enabled
+        nginx_ingress_replica_count         = var.nginx_ingress_replica_count
+        nginx_ingress_allow_prometheus      = var.nginx_ingress_allow_prometheus
+        nginx_ingress_class_name            = local.nginx_ingress_class_name_substrate
+        nginx_ingress_lbl_external_enabled  = local.nginx_ingress_lbl_external_enabled
+        gcp_internal_subnet_name            = var.gcp_internal_subnet_name
+        nginx_ingress_deploy_on             = var.nginx_ingress_deploy_on
+        allow_snippet_annotations           = var.allow_snippet_annotations
+        enable_annotation_validation        = var.enable_annotation_validation
+        nginx_ingress_service_monitor_label = var.nginx_ingress_service_monitor_label
       }
     )
   ]

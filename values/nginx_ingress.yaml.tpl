@@ -17,12 +17,14 @@ controller:
       annotations:
         networking.gke.io/load-balancer-type: "Internal"
         networking.gke.io/internal-load-balancer-allow-global-access: "true"
+  %{ if nginx_ingress_allow_prometheus == "true" }
   metrics:
-    enabled: ${nginx_ingress_allow_prometheus}
+    enabled: "true"
     serviceMonitor:
-      enabled: ${nginx_ingress_allow_prometheus}
+      enabled: "true"
       additionalLabels:
-        release: "kube-prometheus-stack"
+        release: "${nginx_ingress_service_monitor_label}"
+  %{ endif }
   autoscaling:
     enabled: ${nginx_ingress_hpa_enabled}
     minReplicas: 1
