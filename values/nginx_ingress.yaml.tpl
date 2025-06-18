@@ -45,6 +45,8 @@ controller:
     use-forwarded-headers: "true"
     log-format-escape-json: "true"
     log-format-upstream: '{ ... }'
-    annotations-risk-level: Critical   
+    annotations-risk-level: "Critical"
+    allow-snippet-annotations: "true"
+  useConfigMap: true
   allowSnippetAnnotations: ${allow_snippet_annotations}
   enableAnnotationValidations: ${enable_annotation_validation}
